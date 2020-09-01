@@ -39,7 +39,7 @@ const styled = expand({
     [["span"]]: { fontStyle: "italic" },
 });
 
-<span style={styled.span}>Font Size 2rem and Italic<span>
+<span style={styled.span}>Font Size 2rem and Italic</span>
 <SomeReactComponent style={{...styled.h1, ...styled.roundedBorder}} />
 ```
 
