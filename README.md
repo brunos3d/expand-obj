@@ -28,6 +28,23 @@ const foo = expand({
 console.log(foo); // result: { a: '123', b: '123', c: '123' }
 ```
 
+## React example
+
+```jsx
+const expand = require("expand-obj");
+
+const styled = expand({
+    [["h1", "h2", "p", "span"]]: { fontSize: "2rem", fontWeight: "bold" },
+    [["roundedBorder", "cardBorder", "buttonBorder"]]: { borderRadius: "7px" },
+    [["span"]]: { fontStyle: "italic" },
+});
+
+<span style={styled.span}>Font Size 2rem and Italic<span>
+<SomeReactComponent style={{...styled.h1, ...styled.roundedBorder}} />
+```
+
+## More examples
+
 By default the keys will be divided by removing spaces that may exist
 
 ```js
