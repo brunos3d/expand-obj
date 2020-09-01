@@ -1,12 +1,16 @@
 {
-  "name": "expand.js",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "version": "1.0.0",
+    "name": "expand-obj",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/brunos3d/expand-obj"
+    },
+    "description": "Create a multi-key object with the same/multiple values by passing just a string or array.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "Bruno Silva",
+    "license": "MIT"
 }

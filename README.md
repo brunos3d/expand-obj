@@ -1,13 +1,25 @@
-# expand-key-js
+# expand-obj
 
-📦 NODE.JS - Create a multi-key object with the same value
+📦 NODE.JS - Create a multi-key object with the same/multiple values by passing just a string or array.
+
+## Installation
+
+```bash
+npm install expand-obj --save
+```
+
+or
+
+```bash
+yarn add expand-obj
+```
 
 ## How to use
 
 Basically you just need to enter an object that contains one or more keys separated by some character or an array as a key.
 
 ```js
-const expand = require("../index");
+const expand = require("expand-obj");
 
 const foo = expand({
     [["a", "b", "c"]]: "123",
