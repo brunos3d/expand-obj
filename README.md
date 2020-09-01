@@ -43,6 +43,20 @@ const styled = expand({
 <SomeReactComponent style={{...styled.h1, ...styled.roundedBorder}} />
 ```
 
+## Options
+
+By default these are the configuration options
+
+```js
+options = {
+    separator = ",",
+    splitValues = false,
+    deleteRawKey = true,
+    trimSpaces = true,
+    tryJoinRepeatedKeys = true
+}
+```
+
 ## More examples
 
 By default the keys will be divided by removing spaces that may exist
