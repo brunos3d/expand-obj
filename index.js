@@ -1,4 +1,6 @@
-module.exports = function expand(obj, splitValues = false, separator = ",", deleteRawKey = true, trimSpaces = true) {
+module.exports = function expand(obj, options = {}) {
+    const { separator = ",", splitValues = false, deleteRawKey = true, trimSpaces = true } = options;
+
     Object.keys(obj).forEach((key) => {
         const subkeys = key.split(separator);
         const value = obj[key];
