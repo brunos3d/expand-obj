@@ -2,6 +2,12 @@
 
 📦 NODE.JS - Create a multi-key object with the same/multiple values by passing just a string or array.
 
+[![npm version](https://badge.fury.io/js/expand-obj.svg)](http://badge.fury.io/js/expand-obj)
+[![npm downloads](https://img.shields.io/npm/dm/expand-obj.svg)](http://badge.fury.io/js/expand-obj)
+[![Build Status](https://travis-ci.org/BrunoS3D/expand-obj.svg?branch=main)](https://travis-ci.org/BrunoS3D/expand-obj)
+![Hackage-Deps](https://img.shields.io/hackage-deps/v/expand-obj)
+[![Visitors](https://visitor-badge.glitch.me/badge?page_id=BrunoS3D/expand-obj)](https://github.com/BrunoS3D/expand-obj)
+
 ## Installation
 
 ```bash
@@ -19,10 +25,10 @@ yarn add expand-obj
 Basically you just need to enter an object that contains one or more keys separated by some character or an array as a key.
 
 ```js
-const expand = require("expand-obj");
+const expand = require('expand-obj');
 
 const foo = expand({
-    [["a", "b", "c"]]: "123",
+  [['a', 'b', 'c']]: '123',
 });
 
 console.log(foo); // result: { a: '123', b: '123', c: '123' }
@@ -63,7 +69,7 @@ By default the keys will be divided by removing spaces that may exist
 
 ```js
 const foo = expand({
-    ["x, y,z"]: "987",
+  ['x, y,z']: '987',
 });
 
 console.log(foo); // result: { x: '987', y: '987', z: '987' }
@@ -75,10 +81,10 @@ But you can prevent this from happening by using the `trimSpaces` option
 const options = { trimSpaces: false };
 
 const foo = expand(
-    {
-        ["  hello world   , one two three,  foo bar  "]: "I think its broken",
-    },
-    options
+  {
+    ['  hello world   , one two three,  foo bar  ']: 'I think its broken',
+  },
+  options
 );
 
 console.log(foo);
@@ -94,15 +100,15 @@ It is also possible to create variables with different values by passing an arra
 
 ```js
 const options = {
-    splitValues: true,
+  splitValues: true,
 };
 
 const testObj = expand(
-    {
-        [["f", "o", "o"]]: ["bar", {}, []],
-        ["c, a,t, s"]: ["are cool", 123, true],
-    },
-    options
+  {
+    [['f', 'o', 'o']]: ['bar', {}, []],
+    ['c, a,t, s']: ['are cool', 123, true],
+  },
+  options
 );
 
 console.log(testObj);
