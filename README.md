@@ -2,11 +2,11 @@
 
 📦 NODE.JS - Create a multi-key object with the same/multiple values by passing just a string or array.
 
-[![npm version](https://badge.fury.io/js/expand-obj.svg)](http://badge.fury.io/js/expand-obj)
-[![npm downloads](https://img.shields.io/npm/dm/expand-obj.svg)](http://badge.fury.io/js/expand-obj)
-[![Build Status](https://travis-ci.org/BrunoS3D/expand-obj.svg?branch=main)](https://travis-ci.org/BrunoS3D/expand-obj)
+[![npm version](https://badge.fury.io/js/expand-obj.svg)](https://github.com/brunos3d/expand-obj)
+[![npm downloads](https://img.shields.io/npm/dm/expand-obj.svg)](https://github.com/brunos3d/expand-obj)
+[![Build Status](https://app.travis-ci.com/BrunoS3D/expand-obj.svg?branch=main)](https://github.com/brunos3d/expand-obj)
 ![Hackage-Deps](https://img.shields.io/hackage-deps/v/expand-obj)
-[![Visitors](https://visitor-badge.glitch.me/badge?page_id=BrunoS3D/expand-obj)](https://github.com/BrunoS3D/expand-obj)
+[![Visitors](https://visitor-badge.glitch.me/badge?page_id=BrunoS3D/expand-obj)](https://github.com/brunos3d/expand-obj)
 
 ## Installation
 
