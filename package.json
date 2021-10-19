@@ -2,7 +2,7 @@
   "name": "expand-obj",
   "version": "2.0.0",
   "author": "Bruno Silva",
-  "description": "Create a multi-key object with the same/multiple values by passing just a string or array.",
+  "description": "📦 NODE.JS - Create a multi-key object with the same/multiple values by passing just a string or array.",
   "license": "MIT",
   "keywords": [
     "typescript",
