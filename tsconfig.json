@@ -1,0 +1,26 @@
+{
+  "files": [
+    "src/index.ts"
+  ],
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "target": "ES2017",
+    "lib": [
+      "ES2017",
+      "ES2017.object",
+    ],
+    "declaration": true,
+    "declarationDir": "types/",
+    "outDir": "dist/",
+    "esModuleInterop": true,
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}

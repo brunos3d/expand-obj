@@ -1,16 +1,36 @@
 {
-    "version": "1.0.5",
-    "name": "expand-obj",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/brunos3d/expand-obj"
-    },
-    "description": "Create a multi-key object with the same/multiple values by passing just a string or array.",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "keywords": [],
-    "author": "Bruno Silva",
-    "license": "MIT"
+  "name": "expand-obj",
+  "version": "2.0.0",
+  "author": "Bruno Silva",
+  "description": "Create a multi-key object with the same/multiple values by passing just a string or array.",
+  "license": "MIT",
+  "keywords": [
+    "typescript",
+    "object",
+    "expand",
+    "spread",
+    "micro"
+  ],
+  "main": "./dist/index.js",
+  "types": "./types/index.d.ts",
+  "files": [
+    "dist",
+    "types"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brunos3d/expand-obj"
+  },
+  "scripts": {
+    "test": "yarn run test:types && yarn run test:unit",
+    "test:unit": "ava",
+    "test:types": "tsc -p ./tsconfig.json --noEmit",
+    "build": "tsc -p ./tsconfig.json",
+    "prepublishOnly": "yarn run test && yarn run build"
+  },
+  "devDependencies": {
+    "ava": "^3.13.0",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
+  }
 }
