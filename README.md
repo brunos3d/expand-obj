@@ -20,6 +20,26 @@ or
 yarn add expand-obj
 ```
 
+## Importation
+
+commonjs
+
+```js
+const expand = require('expand-obj');
+```
+
+or ES6 (export default)
+
+```js
+import expand from 'expand-obj';
+```
+
+or ES6 (named export)
+
+```js
+import { expand } from 'expand-obj';
+```
+
 ## How to use
 
 Basically you just need to enter an object that contains one or more keys separated by some character or an array as a key.
@@ -28,21 +48,44 @@ Basically you just need to enter an object that contains one or more keys separa
 const expand = require('expand-obj');
 
 const foo = expand({
-  [['a', 'b', 'c']]: '123',
+  ['a, b, c']: 123,
 });
 
-console.log(foo); // result: { a: '123', b: '123', c: '123' }
+console.log(foo); // result: { a: 123, b: 123, c: 123 }
+```
+
+With options
+
+```js
+const foo = expand(
+  {
+    ['a, b, c']: [1, 2, 3],
+  },
+  { splitValues: true }
+);
+
+console.log(foo); // result: { a: 1, b: 2, c: 3 }
+```
+
+Resolve functions
+
+```js
+const foo = await expand({
+  ['a, b, c']: async (val: string) => `test=${val}`,
+});
+
+console.log(foo); // result: { a: `test=a`, b: `test=b`, c: `test=c` }
 ```
 
 ## React example
 
 ```jsx
-const expand = require("expand-obj");
+const expand = require('expand-obj');
 
-const styled = expand({
-    [["h1", "h2", "p", "span"]]: { fontSize: "2rem", fontWeight: "bold" },
-    [["roundedBorder", "cardBorder", "buttonBorder"]]: { borderRadius: "7px" },
-    "span": { fontStyle: "italic" },
+const styled = await expand({
+    'h1, h2, p, span': { fontSize: '2rem', fontWeight: 'bold' },
+    'roundedBorder, cardBorder, buttonBorder': { borderRadius: '7px' },
+    'span': { fontStyle: 'italic' },
 });
 
 <span style={styled.span}>Font Size 2rem and Italic</span>
@@ -54,71 +97,115 @@ const styled = expand({
 By default these are the configuration options
 
 ```js
-options = {
-    separator = ",",
-    splitValues = false,
-    deleteRawKey = true,
-    trimSpaces = true,
-    tryJoinRepeatedKeys = true
-}
+export type ExpandOptions = {
+  separator?: string, // default: ','
+  splitValues?: boolean, // default: false
+  deleteRawKey?: boolean, // default: true
+  trimSpaces?: boolean, // default: true
+  tryJoinRepeatedKeys?: boolean, // default: true
+  resolveFuncs?: boolean, // default: true
+  useSubkeyAsParams?: boolean, // default: true
+};
 ```
 
-## More examples
+## separator (default = ",")
 
-By default the keys will be divided by removing spaces that may exist
-
-```js
-const foo = expand({
-  ['x, y,z']: '987',
-});
-
-console.log(foo); // result: { x: '987', y: '987', z: '987' }
-```
-
-But you can prevent this from happening by using the `trimSpaces` option
+define the subkey separator
 
 ```js
-const options = { trimSpaces: false };
+const options = {
+  separator: '|',
+};
 
-const foo = expand(
+const obj = await expand(
   {
-    ['  hello world   , one two three,  foo bar  ']: 'I think its broken',
+    'a, b, c': 123,
   },
   options
 );
 
-console.log(foo);
-
-// result: {
-//   '  hello world   ': 'I think its broken',
-//   ' one two three': 'I think its broken',
-//   '  foo bar  ': 'I think its broken'
-// }
+console.log(obj); // result: { a: 123, b: 123, c: 123 }
 ```
 
-It is also possible to create variables with different values by passing an array as the initial value, for this use the option `splitValues`
+## splitValues (default = false)
+
+when true, spreads the values if the property value is of type array
 
 ```js
 const options = {
   splitValues: true,
 };
 
-const testObj = expand(
+const obj = await expand(
   {
-    [['f', 'o', 'o']]: ['bar', {}, []],
-    ['c, a,t, s']: ['are cool', 123, true],
+    'a, b, c': 123,
+    'h, i, j': [4, 5, 6],
+    'x, y, z': [7, 8],
   },
   options
 );
 
-console.log(testObj);
+console.log(obj); // result: { a: 123, b: 123, c: 123, h: 4, i: 5, j: 6, x: 7, y: 8, z: 8 }
+// obs: note that the spread made uses the index of the
+// current subkey in the property's key list
+// and "z" repeats the last value in the array of values
+```
 
-// result: {
-//     f: "bar",
-//     o: [],
-//     c: "are cool",
-//     a: 123,
-//     t: true,
-//     s: true,
-// };
+## deleteRawKey (default = true)
+
+when false, prevents the raw key from being removed from object entries
+
+```js
+const options = {
+  deleteRawKey: false,
+};
+
+const obj = await expand(
+  {
+    'a, b, c': 123,
+  },
+  options
+);
+
+console.log(obj); // result: { 'a, b, c': 123, a: 123, b: 123, c: 123 }
+```
+
+## trimSpaces (default = true)
+
+when false, keep leading and trailing spaces
+
+```js
+const options = {
+  trimSpaces: false,
+};
+
+const obj = await expand(
+  {
+    'a, b, c': 123,
+  },
+  options
+);
+
+console.log(obj); // result: { a: 123, ' b': 123, ' c': 123 }
+```
+
+## tryJoinRepeatedKeys (default = true)
+
+when true, if the input object has a key that is equal to a subkey and both values are an array or an object the two values will be merged
+
+```js
+const options = {
+  tryJoinRepeatedKeys: false,
+};
+
+const obj = await expand(
+  {
+    'a, b, c': 123,
+    'foo, bar': [4, 5, 6],
+    foo: [789],
+  },
+  options
+);
+
+console.log(obj); // result: { a: 123, b: 123, c: 123, foo: [4, 5, 6, 789], bar: [4, 5, 6] }
 ```
